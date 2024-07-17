@@ -6,14 +6,38 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/17 08:43:07 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/17 22:53:40 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_lang.h"
+#include "so_long.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_printf("Hello world");
+	t_window	window;
+
+	if (argc != 2)
+		return (ft_putstr_fd(RED ARG_ERR RESET, 2));
+	if (file_exist(argv[1]) && file_extention(argv[1], ".ber"))
+	{
+		init_maps(argv[1], &window);
+		if (!syntaxe_error(&window))
+			ft_printf("erer");
+	}
+	/* LIRE LE FICHIER .BER
+		* verrifier les lettres x
+		* verrifer que toutes les lignes ont la meme longueurs x
+		* limiter le nombre de ligne x
+		* verrifier qu'il y a au moins un collectible
+		* verrfier que les collectible soit tous colectable
+		* verrifier que la map est fermee
+		* verrfier qu'elle est possible
+		*/
 	return (0);
 }
+
+/*
+
+attention free la list maps
+
+*/
