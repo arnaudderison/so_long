@@ -6,14 +6,14 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/17 06:51:41 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/17 08:43:07 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_lang.h"
 
 int	main(void)
 {
-	ft_printf("coucou");
+	ft_printf("Hello world");
 	return (0);
 }
