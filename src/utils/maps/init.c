@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:23:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/17 23:01:21 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:50:08 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_maps(char *path, t_window *win)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return ;
+	win->maps = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{
