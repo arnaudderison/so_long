@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/17 22:53:40 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:26:06 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	if (file_exist(argv[1]) && file_extention(argv[1], ".ber"))
 	{
 		init_maps(argv[1], &window);
-		if (!syntaxe_error(&window))
+		if (!syntaxe_error(&window) || !is_valid_map(&window.maps))
 			ft_printf("erer");
 	}
 	/* LIRE LE FICHIER .BER
