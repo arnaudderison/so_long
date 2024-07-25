@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 05:48:40 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/25 20:57:57 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_window
 {
-	t_list	*maps;
+	char	**maps;
 	int		row_size;
 	int		col_size;
 }			t_window;
@@ -53,7 +53,7 @@ typedef struct s_astar
 }			t_astar;
 
 int			syntaxe_error(t_window *win);
-int			is_valid_map(t_list **plan);
+int			is_valid_map(char **map);
 int			isValid(int row, int col, t_window *win);
 int			isUnBlocked(t_window *win, int row, int col);
 int			isDestination(t_point src, t_point dest);

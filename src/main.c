@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 03:59:30 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:11:00 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char **argv)
 	if (file_exist(argv[1]) && file_extention(argv[1], ".ber"))
 	{
 		init_maps(argv[1], &window);
-		if (!syntaxe_error(&window) || !is_valid_map(&window.maps))
-			ft_printf("erer");
+		if (!syntaxe_error(&window) || !is_valid_map(window.maps))
+			return (ft_printf("erer"));
 	}
 	/* LIRE LE FICHIER .BER
 		* verrifier les lettres x
@@ -39,6 +39,10 @@ int	main(int argc, char **argv)
 
 /*
 
-attention free la list maps
+ -------------------------------------
+|                  .                  |
+| /!\ Attention free la list maps /!\ |
+|                  .                  |
+ -------------------------------------
 
 */

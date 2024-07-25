@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:01:20 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/24 20:32:56 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:25:25 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	is_wall(char *line)
 	int	len;
 
 	len = ft_strlen(line);
-	while (--len - 1 > 0)
-		if (line[len - 1] != '1')
+	while (--len > 0)
+		if (line[len - (ft_strchr(line, '\n') != NULL)] != '1')
 			return (false);
 	return (true);
 }
@@ -39,29 +39,28 @@ static void	nb_items(char *line, int *items)
 	}
 }
 
-int	is_valid_map(t_list **plan)
+int	is_valid_map(char **map)
 {
-	t_list	*map;
-	int		items[3];
+	int	items[3];
+	int	i;
 
-	if (!plan || !*plan)
+	if (!map || !*map)
 		return (false);
-	map = *plan;
 	items[0] = 0;
 	items[1] = 0;
 	items[2] = 0;
-	if (!is_wall(map->content))
+	i = 0;
+	if (!is_wall(map[i]))
 		return (0);
-	while (map)
+	while (map[i])
 	{
-		if (((char *)map->content)[0] != '1'
-			|| ((char *)map->content)[ft_strlen(map->content) - 2] != '1')
+		if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 2] != '1')
 			return (0);
-		nb_items(map->content, items);
-		if (!map->next)
-			if (!is_wall(map->content))
+		nb_items(map[i], items);
+		if (!map[i + 1])
+			if (!is_wall(map[i]))
 				return (0);
-		map = map->next;
+		i++;
 	}
 	return (items[0] > 0 && items[1] == 1 && items[2] == 1);
 }

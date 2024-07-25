@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:31:13 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 03:57:27 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:06:42 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,21 @@
 int	syntaxe_error(t_window *win)
 {
 	int		i;
-	t_list	*tmp;
+	char	**tmp;
 	int		size;
 
-	i = -1;
+	i = 0;
 	tmp = win->maps;
-	size = ft_strlen(tmp->content);
+	size = ft_strlen(tmp[i]);
 	if (size > 1920 / 32)
 		return (false);
-	win->col_size = size;
-	while (++i < ft_lstsize(win->maps))
+	while (i < win->row_size)
 	{
 		if (i > 1080 / 32)
 			return (false);
-		if (!line_checkchr(tmp->content) || !line_checknbr(tmp->content, size))
+		if (!line_checkchr(tmp[i]) || !line_checknbr(tmp[i], size))
 			return (false);
-		tmp = tmp->next;
+		i++;
 	}
-	win->row_size = i;
 	return (true);
 }
