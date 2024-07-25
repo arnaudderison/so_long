@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/24 15:26:06 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/25 03:59:30 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	main(int argc, char **argv)
 		* verrifier les lettres x
 		* verrifer que toutes les lignes ont la meme longueurs x
 		* limiter le nombre de ligne x
-		* verrifier qu'il y a au moins un collectible
 		* verrfier que les collectible soit tous colectable
-		* verrifier que la map est fermee
+		* verrifier que la map est fermee X
 		* verrfier qu'elle est possible
+		* verrifier qu'il y a au moins un collectible
 		*/
+	ft_printf("alors %d", window.col_size);
 	return (0);
 }
 
