@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 21:11:00 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:03:21 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_window	window;
+	t_point		src;
+	t_point		dest;
 
 	if (argc != 2)
 		return (ft_putstr_fd(RED ARG_ERR RESET, 2));
@@ -24,6 +26,11 @@ int	main(int argc, char **argv)
 		if (!syntaxe_error(&window) || !is_valid_map(window.maps))
 			return (ft_printf("erer"));
 	}
+	src.x = 5;
+	src.y = 3;
+	dest.x = 5;
+	dest.y = 3;
+	astar(window.maps, src, dest, &window);
 	/* LIRE LE FICHIER .BER
 		* verrifier les lettres x
 		* verrifer que toutes les lignes ont la meme longueurs x

@@ -6,7 +6,7 @@
 #    By: aderison <aderison@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 06:35:03 by aderison          #+#    #+#              #
-#    Updated: 2024/07/25 04:16:53 by aderison         ###   ########.fr        #
+#    Updated: 2024/07/30 22:39:28 by aderison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ NC=\033[0m
 #so_long utils
 SO_LONGS_FILE = $(addprefix file/, file_exist.c file_extention.c)
 SO_LONGS_MAPS = $(addprefix maps/, line_checkchr.c line_checknbr.c init.c \
- syntaxe_error.c is_valid_map.c astar_utils.c)
+syntaxe_error.c is_valid_map.c astar_utils.c astar_utils2.c)
 SO_LONGS_UTILS = $(addprefix utils/, $(SO_LONGS_FILE) $(SO_LONGS_MAPS))
 
 #so_long maps
@@ -39,7 +39,7 @@ SO_LONG_MAPS_F = $(addprefix maps/, astar.c)
 SO_LONG_MAIN = main.c 
 
 #so_long sources
-SO_LONG_SRCS = $(addprefix src/, $(SO_LONG_MAIN) $(SO_LONGS_UTILS))
+SO_LONG_SRCS = $(addprefix src/, $(SO_LONG_MAIN) $(SO_LONGS_UTILS) $(SO_LONG_MAPS_F))
 SO_LONG_OBJS = $(SO_LONG_SRCS:src/%.c=obj/%.o)
 
 

@@ -1,6 +1,7 @@
-#include <math.h>
+#include <float.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define ROW 5
 #define COL 5
@@ -8,185 +9,202 @@
 typedef struct
 {
 	int row, col;
-}			Point;
+}			t_point;
 
 typedef struct
 {
 	int f, g, h;
-	Point	parent;
-}			Node;
+	t_point	parent;
+}			t_node;
 
 typedef struct
 {
-	Point	point;
-	Node	node;
-}			Cell;
+	t_point	point;
+	t_node	node;
+}			t_cell;
 
-int	isValid(int row, int col)
+int	is_valid(int row, int col)
 {
-	return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL);
+	return (row >= 0 && row < ROW && col >= 0 && col < COL);
 }
 
-int	isUnBlocked(int grid[ROW][COL], int row, int col)
+int	is_unblocked(int grid[ROW][COL], int row, int col)
 {
 	return (grid[row][col] == 1);
 }
 
-int	isDestination(Point src, Point dest)
+int	is_destination(t_point src, t_point dest)
 {
 	return (src.row == dest.row && src.col == dest.col);
 }
 
-int	calculateHValue(Point src, Point dest)
+int	calculate_h_value(t_point src, t_point dest)
 {
 	return (abs(src.row - dest.row) + abs(src.col - dest.col));
 }
 
-void	tracePath(Node nodeDetails[ROW][COL], Point dest)
+void	trace_path(t_node node_details[ROW][COL], t_point dest)
 {
 	int	row;
 	int	col;
 	int	temp_row;
 	int	temp_col;
 
-	printf("The path is: \n");
 	row = dest.row;
 	col = dest.col;
-	while (!(nodeDetails[row][col].parent.row == row
-			&& nodeDetails[row][col].parent.col == col))
+	printf("The path is: \n");
+	while (!(node_details[row][col].parent.row == row
+			&& node_details[row][col].parent.col == col))
 	{
 		printf("-> (%d, %d) ", row, col);
-		temp_row = nodeDetails[row][col].parent.row;
-		temp_col = nodeDetails[row][col].parent.col;
+		temp_row = node_details[row][col].parent.row;
+		temp_col = node_details[row][col].parent.col;
 		row = temp_row;
 		col = temp_col;
 	}
 	printf("-> (%d, %d)\n", row, col);
 }
 
-void	aStarSearch(int grid[ROW][COL], Point src, Point dest)
+void	initialize_node_details(t_node node_details[ROW][COL])
 {
-	int		closedList[ROW][COL];
-	Node	nodeDetails[ROW][COL];
-	Cell	openList[ROW * COL];
-	int		openListSize;
-	int		foundDest;
-	Cell	currentCell;
+	for (int i = 0; i < ROW; i++)
+	{
+		for (int j = 0; j < COL; j++)
+		{
+			node_details[i][j].f = FLT_MAX;
+			node_details[i][j].g = FLT_MAX;
+			node_details[i][j].h = FLT_MAX;
+			node_details[i][j].parent.row = -1;
+			node_details[i][j].parent.col = -1;
+		}
+	}
+}
+
+void	add_to_open_list(t_cell *open_list, int *open_list_size, t_point point,
+		t_node node)
+{
+	open_list[*open_list_size].point = point;
+	open_list[*open_list_size].node = node;
+	(*open_list_size)++;
+}
+
+void	remove_from_open_list(t_cell *open_list, int *open_list_size, int index)
+{
+	open_list[index] = open_list[*open_list_size - 1];
+	(*open_list_size)--;
+}
+
+void	update_node_details(t_node *node, int g_new, int h_new, t_point parent)
+{
+	node->g = g_new;
+	node->h = h_new;
+	node->f = g_new + h_new;
+	node->parent = parent;
+}
+
+void	a_star_search(int grid[ROW][COL], t_point src, t_point dest)
+{
+	int		closed_list[ROW][COL];
+	t_node	node_details[ROW][COL];
+	t_cell	open_list[ROW * COL];
+	int		open_list_size;
+	int		found_dest;
+	t_cell	current_cell;
+	int		directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 	int		index;
-	Point	point;
-	int		newRow[] = {-1, 1, 0, 0};
-	int		newCol[] = {0, 0, -1, 1};
+	t_point	point;
 	int		row;
 	int		col;
-	int		gNew;
-	int		hNew;
-	int		fNew;
+	int		g_new;
+	int		h_new;
+	int		f_new;
 
-	if (!isValid(src.row, src.col) || !isValid(dest.row, dest.col))
+	open_list_size = 0;
+	found_dest = 0;
+	if (!is_valid(src.row, src.col) || !is_valid(dest.row, dest.col))
 	{
 		printf("Source or the destination is invalid\n");
 		return ;
 	}
-	if (!isUnBlocked(grid, src.row, src.col) || !isUnBlocked(grid, dest.row,
+	if (!is_unblocked(grid, src.row, src.col) || !is_unblocked(grid, dest.row,
 			dest.col))
 	{
 		printf("Source or the destination is blocked\n");
 		return ;
 	}
-	if (isDestination(src, dest))
+	if (is_destination(src, dest))
 	{
 		printf("We are already at the destination\n");
 		return ;
 	}
-	memset(closedList, 0, sizeof(closedList));
-	int i, j;
-	for (i = 0; i < ROW; i++)
+	memset(closed_list, 0, sizeof(closed_list));
+	initialize_node_details(node_details);
+	node_details[src.row][src.col].f = 0;
+	node_details[src.row][src.col].g = 0;
+	node_details[src.row][src.col].h = 0;
+	node_details[src.row][src.col].parent = src;
+	add_to_open_list(open_list, &open_list_size, src,
+		node_details[src.row][src.col]);
+	while (open_list_size > 0)
 	{
-		for (j = 0; j < COL; j++)
-		{
-			nodeDetails[i][j].f = FLT_MAX;
-			nodeDetails[i][j].g = FLT_MAX;
-			nodeDetails[i][j].h = FLT_MAX;
-			nodeDetails[i][j].parent.row = -1;
-			nodeDetails[i][j].parent.col = -1;
-		}
-	}
-	i = src.row;
-	j = src.col;
-	nodeDetails[i][j].f = 0.0;
-	nodeDetails[i][j].g = 0.0;
-	nodeDetails[i][j].h = 0.0;
-	nodeDetails[i][j].parent.row = i;
-	nodeDetails[i][j].parent.col = j;
-	openListSize = 0;
-	openList[openListSize].point = src;
-	openList[openListSize].node = nodeDetails[i][j];
-	openListSize++;
-	foundDest = 0;
-	while (openListSize > 0)
-	{
-		currentCell = openList[0];
+		current_cell = open_list[0];
 		index = 0;
-		for (i = 1; i < openListSize; i++)
+		for (int i = 1; i < open_list_size; i++)
 		{
-			if (openList[i].node.f < currentCell.node.f)
+			if (open_list[i].node.f < current_cell.node.f)
 			{
-				currentCell = openList[i];
+				current_cell = open_list[i];
 				index = i;
 			}
 		}
-		point = currentCell.point;
-		openList[index] = openList[openListSize - 1];
-		openListSize--;
-		i = point.row;
-		j = point.col;
-		[i][j] = 1;
-		for (int k = 0; k < 4; k++)
+		point = current_cell.point;
+		remove_from_open_list(open_list, &open_list_size, index);
+		closed_list[point.row][point.col] = 1;
+		for (int d = 0; d < 4; d++)
 		{
-			row = i + newRow[k];
-			col = j + newCol[k];
-			if (isValid(row, col))
+			row = point.row + directions[d][0];
+			col = point.col + directions[d][1];
+			if (is_valid(row, col))
 			{
-				if (isDestination((Point){row, col}, dest))
+				if (is_destination((t_point){row, col}, dest))
 				{
-					nodeDetails[row][col].parent.row = i;
-					nodeDetails[row][col].parent.col = j;
-					tracePath(nodeDetails, dest);
-					foundDest = 1;
+					node_details[row][col].parent = point;
+					trace_path(node_details, dest);
+					found_dest = 1;
 					return ;
 				}
-				else if (!closedList[row][col] && isUnBlocked(grid, row, col))
+				else if (!closed_list[row][col] && is_unblocked(grid, row, col))
 				{
-					gNew = nodeDetails[i][j].g + 1;
-					hNew = calculateHValue((Point){row, col}, dest);
-					fNew = gNew + hNew;
-					if (nodeDetails[row][col].f == FLT_MAX
-						|| nodeDetails[row][col].f > fNew)
+					g_new = node_details[point.row][point.col].g + 1;
+					h_new = calculate_h_value((t_point){row, col}, dest);
+					f_new = g_new + h_new;
+					if (node_details[row][col].f == FLT_MAX
+						|| node_details[row][col].f > f_new)
 					{
-						openList[openListSize].point = (Point){row, col};
-						openList[openListSize].node.f = fNew;
-						openList[openListSize].node.g = gNew;
-						openList[openListSize].node.h = hNew;
-						openList[openListSize].node.parent.row = i;
-						openList[openListSize].node.parent.col = j;
-						openListSize++;
-						nodeDetails[row][col] = openList[openListSize - 1].node;
+						update_node_details(&node_details[row][col], g_new,
+							h_new, point);
+						add_to_open_list(open_list, &open_list_size,
+							(t_point){row, col}, node_details[row][col]);
 					}
 				}
 			}
 		}
-	           
+	}
+	if (!found_dest)
+	{
+		printf("Failed to find the destination cell\n");
+	}
 }
 
 int	main(void)
 {
 	int		grid[ROW][COL] = {{1, 1, 1, 1, 1}, {1, 0, 1, 0, 1}, {1, 1, 1, 1, 1},
 				{1, 0, 1, 0, 1}, {1, 1, 1, 1, 1}};
-	Point	src;
-	Point	dest;
+	t_point	src;
+	t_point	dest;
 
 	src = {0, 0};
 	dest = {4, 4};
-	aStarSearch(grid, src, dest);
+	a_star_search(grid, src, dest);
 	return (0);
 }

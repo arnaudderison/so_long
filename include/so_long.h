@@ -6,12 +6,12 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 07:06:30 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/17 22:07:07 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:11:44 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LANG_H
-# define SO_LANG_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include "libft.h"
 # include "maps.h"
@@ -36,10 +36,8 @@ typedef enum e_bool
 	true
 }		t_bool;
 
-// file
 t_bool	file_exist(const char *path);
 t_bool	file_extention(const char *path, const char *ext);
-// check map
 t_bool	line_checkchr(char *line);
 t_bool	line_checknbr(char *line, int size);
 void	init_maps(char *path, t_window *win);

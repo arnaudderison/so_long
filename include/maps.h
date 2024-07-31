@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 20:57:57 by aderison         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:07:10 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_cell
 
 typedef struct s_astar
 {
-	t_list	*closed_list;
+	int		**closed_list;
 	t_node	**node_details;
 	t_point	src;
 	t_point	dest;
@@ -54,9 +54,11 @@ typedef struct s_astar
 
 int			syntaxe_error(t_window *win);
 int			is_valid_map(char **map);
-int			isValid(int row, int col, t_window *win);
-int			isUnBlocked(t_window *win, int row, int col);
-int			isDestination(t_point src, t_point dest);
-int			calculateHValue(t_point src, t_point dest);
+int			is_valid(int row, int col, t_window *win);
+int			is_unblocked(t_window *win, int row, int col);
+int			is_destination(t_point src, t_point dest);
+int			calculate_hvalue(t_point src, t_point dest);
+int			check_src_dest(t_point src, t_point dest, t_window *win);
+void		astar(char **grid, t_point src, t_point dest, t_window *win);
 
 #endif
