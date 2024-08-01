@@ -6,7 +6,7 @@
 #    By: aderison <aderison@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 06:35:03 by aderison          #+#    #+#              #
-#    Updated: 2024/07/30 22:39:28 by aderison         ###   ########.fr        #
+#    Updated: 2024/08/01 21:03:25 by aderison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,8 @@ $(NAME): $(SO_LONG_OBJS)
 
 obj/%.o: src/%.c
 	@mkdir -p $(dir $@)
+	@make -C lib/libft/
+	@make -C lib/minilibx/
 	@echo "\r${CYAN}Compiling $<...${NC}"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	
