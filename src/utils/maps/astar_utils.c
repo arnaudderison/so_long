@@ -6,26 +6,18 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 03:44:28 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/30 22:43:00 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:36:36 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_valid(int row, int col, t_window *win)
-{
-	return (row >= 0) && (row < win->row_size) && (col >= 0)
-		&& (col < win->col_size);
-}
-
 int	is_unblocked(t_window *win, int row, int col)
 {
 	int		y;
-	int		x;
 	char	*line;
 
 	y = -1;
-	x = -1;
 	while (++y < row)
 		line = (win->maps)[y];
 	if (line[col] == '1')
@@ -38,27 +30,42 @@ int	is_destination(t_point src, t_point dest)
 	return (src.y == dest.y && src.x == dest.x);
 }
 
-int	calculate_hvalue(t_point src, t_point dest)
+t_node	*create_node(int x, int y)
 {
-	return (abs(src.y - dest.y) + abs(src.x - dest.x));
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return (NULL);
+	node->pos.x = x;
+	node->pos.y = y;
+	node->f = 0;
+	node->g = 0;
+	node->h = 0;
+	node->parent = NULL;
+	return (node);
 }
 
-void	init_node_details(t_astar *astar, t_window *win)
+void	free_grid(t_astar *astar)
 {
 	int	i;
-	int	j;
 
-	i = -1;
-	while (++i < win->row_size)
+	i = 0;
+	while (i < astar->height)
 	{
-		j = -1;
-		while (++j < win->col_size)
-		{
-			astar->node_details[i][j].f = -1;
-			astar->node_details[i][j].g = -1;
-			astar->node_details[i][j].h = -1;
-			astar->node_details[i][j].parent.y = -1;
-			astar->node_details[i][j].parent.x = -1;
-		}
+		free(astar->grid[i]);
+		i++;
 	}
+	free(astar->grid);
+}
+
+int	heuristic(t_point a, t_point b)
+{
+	return (abs(a.x - b.x) + abs(a.y - b.y));
+}
+
+int	is_valid(t_astar *astar, int x, int y)
+{
+	return (x >= 0 && x < astar->width && y >= 0 && y < astar->height
+		&& astar->grid[y][x].g != -1);
 }

@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/30 22:07:10 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:22:25 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,47 @@
 
 typedef struct s_window
 {
-	char	**maps;
-	int		row_size;
-	int		col_size;
-}			t_window;
+	char			**maps;
+	int				row_size;
+	int				col_size;
+}					t_window;
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
-}			t_point;
+	int				x;
+	int				y;
+}					t_point;
 
 typedef struct s_node
 {
-	int		f;
-	int		g;
-	int		h;
-	t_point	parent;
-}			t_node;
-
-typedef struct s_cell
-{
-	t_point	point;
-	t_node	node;
-}			t_cell;
+	t_point			pos;
+	int				f;
+	int				g;
+	int				h;
+	struct s_node	*parent;
+}					t_node;
 
 typedef struct s_astar
 {
-	int		**closed_list;
-	t_node	**node_details;
-	t_point	src;
-	t_point	dest;
-	t_point	*open_list;
-	int		open_size;
-}			t_astar;
+	t_node			**grid;
+	t_point			start;
+	t_point			end;
+	int				width;
+	int				height;
+}					t_astar;
 
-int			syntaxe_error(t_window *win);
-int			is_valid_map(char **map);
-int			is_valid(int row, int col, t_window *win);
-int			is_unblocked(t_window *win, int row, int col);
-int			is_destination(t_point src, t_point dest);
-int			calculate_hvalue(t_point src, t_point dest);
-int			check_src_dest(t_point src, t_point dest, t_window *win);
-void		astar(char **grid, t_point src, t_point dest, t_window *win);
+int					syntaxe_error(t_window *win);
+int					is_valid_map(char **map);
+// int					is_valid(int row, int col, t_window *win);
+// int					is_unblocked(t_window *win, int row, int col);
+// int					is_destination(t_point src, t_point dest);
+// int					calculate_hvalue(t_point src, t_point dest);
+// int					check_src_dest(t_point src, t_point dest,
+// t_window *win);
+int					is_valid(t_astar *astar, int x, int y);
+t_node				*create_node(int x, int y);
+t_node				*astar(t_astar *astar);
+int					heuristic(t_point a, t_point b);
+void				free_grid(t_astar *astar);
 
 #endif
