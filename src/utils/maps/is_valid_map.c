@@ -6,11 +6,42 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:01:20 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 21:25:25 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/05 04:21:51 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_collectible(t_point start, t_window *win)
+{
+	int		i;
+	int		j;
+	t_astar	tastar;
+	t_node	*result;
+
+	i = -1;
+	while (++i < win->row_size)
+	{
+		j = -1;
+		while (++j < win->col_size)
+		{
+			if (win->maps[i][j] == 'C')
+			{
+				initialize_astar(&tastar, win, start, (t_point){j, i});
+				fill_grid(&tastar, win);
+				set_start_node(&tastar);
+				result = astar(&tastar);
+				free_grid(&tastar);
+				if (!result)
+				{
+					ft_printf("ERROR : %d %d\n", j, i);
+					return (0);
+				}
+			}
+		}
+	}
+	return (1);
+}
 
 static int	is_wall(char *line)
 {

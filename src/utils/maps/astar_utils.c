@@ -6,29 +6,11 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 03:44:28 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/03 17:36:36 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/05 01:47:46 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	is_unblocked(t_window *win, int row, int col)
-{
-	int		y;
-	char	*line;
-
-	y = -1;
-	while (++y < row)
-		line = (win->maps)[y];
-	if (line[col] == '1')
-		return (0);
-	return (1);
-}
-
-int	is_destination(t_point src, t_point dest)
-{
-	return (src.y == dest.y && src.x == dest.x);
-}
 
 t_node	*create_node(int x, int y)
 {
