@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/05 07:22:35 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/06 00:18:31 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,13 @@ typedef struct s_ghost
 {
 	int				x;
 	int				y;
-	int				dx;
-	int				dy;
+	float			pixel_x;
+	float			pixel_y;
+	int				current_target;
+	int				num_targets;
+	float			speed;
+	t_point			targets[100];
+	int				frame_count;
 	void			*img;
 	t_node			*path;
 	int				path_index;
@@ -81,12 +86,6 @@ typedef struct s_game
 
 int					syntaxe_error(t_window *win);
 int					is_valid_map(char **map);
-// int					is_valid(int row, int col, t_window *win);
-// int					is_unblocked(t_window *win, int row, int col);
-// int					is_destination(t_point src, t_point dest);
-// int					calculate_hvalue(t_point src, t_point dest);
-// int					check_src_dest(t_point src, t_point dest,
-// t_window *win);
 int					is_valid(t_astar *astar, int x, int y);
 t_node				*create_node(int x, int y);
 t_node				*astar(t_astar *astar);
@@ -99,5 +98,10 @@ void				set_start_node(t_astar *tastar);
 int					process_result(t_node *result);
 int					check_collectible(t_point start, t_window *win);
 void				print_path(t_node *end);
+void				load_images(t_game *game);
+void				cleanup(t_game *game);
+int					close_window(t_game *game);
+void				draw_map(t_game *game);
+void				window(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/05 07:53:45 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/06 00:15:40 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,185 +105,21 @@ int	process_result(t_node *result)
 	return (0);
 }
 
-void	load_images(t_game *game)
-{
-	int	img_width;
-	int	img_height;
-
-	img_width = 32;
-	img_height = 32;
-	game->images.wall = mlx_xpm_file_to_image(game->window.mlx,
-			"./assets/xpm/wall.xpm", &img_width, &img_height);
-	game->images.collectible = mlx_xpm_file_to_image(game->window.mlx,
-			"./assets/xpm/food.xpm", &img_width, &img_height);
-	game->images.ghost = mlx_xpm_file_to_image(game->window.mlx,
-			"./assets/xpm/ghost.xpm", &img_width, &img_height);
-	game->images.background = mlx_xpm_file_to_image(game->window.mlx,
-			"./assets/xpm/black.xpm", &img_width, &img_height);
-}
-
-void	cleanup(t_game *game)
-{
-	int	i;
-
-	if (game->images.wall)
-		mlx_destroy_image(game->window.mlx, game->images.wall);
-	if (game->images.collectible)
-		mlx_destroy_image(game->window.mlx, game->images.collectible);
-	if (game->images.player)
-		mlx_destroy_image(game->window.mlx, game->images.player);
-	if (game->images.exit)
-		mlx_destroy_image(game->window.mlx, game->images.exit);
-	if (game->images.ghost)
-		mlx_destroy_image(game->window.mlx, game->images.ghost);
-	if (game->window.win)
-		mlx_destroy_window(game->window.mlx, game->window.win);
-	if (game->window.mlx)
-	{
-		mlx_destroy_window(game->window.mlx, game->window.win);
-		ft_free(1, &game->window.mlx);
-	}
-	i = -1;
-	while (++i < game->window.row_size)
-		ft_free(1, &game->window.maps[i]);
-	ft_free(1, &game->window.maps);
-}
-
-int	close_window(t_game *game)
-{
-	cleanup(game);
-	exit(0);
-}
-
-void	draw_map(t_game *game)
-{
-	int		y;
-	int		x;
-	void	*img_to_use;
-
-	y = 0;
-	while (y < game->window.row_size)
-	{
-		x = 0;
-		while (x < game->window.col_size)
-		{
-			img_to_use = NULL;
-			if (game->window.maps[y][x] == '1')
-				img_to_use = game->images.wall;
-			else if (game->window.maps[y][x] == 'C')
-				img_to_use = game->images.collectible;
-			else if (game->window.maps[y][x] == 'G')
-				img_to_use = game->images.ghost;
-			else if (game->window.maps[y][x] == '0')
-				img_to_use = game->images.background;
-			if (img_to_use)
-				mlx_put_image_to_window(game->window.mlx, game->window.win,
-					img_to_use, x * 32, y * 32);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	init_ghost(t_game *game)
-{
-	game->ghost.x = 1;
-	game->ghost.y = 1;
-	game->ghost.dx = 1;
-	game->ghost.dy = 0;
-	game->ghost.path = NULL;
-	game->ghost.path_index = -1;
-}
-t_point	find_target(void)
-{
-	t_point	target;
-
-	target.x = 13;
-	target.y = 13;
-	return (target);
-}
-void	move_ghost(t_game *game)
-{
-	t_point	target;
-	t_astar	tastar;
-	t_point	start;
-	t_node	*result;
-	t_node	*next_move;
-
-	target = find_target();
-	start = (t_point){game->ghost.x, game->ghost.y};
-	initialize_astar(&tastar, &game->window, start, target);
-	fill_grid(&tastar, &game->window);
-	set_start_node(&tastar);
-	result = astar(&tastar);
-	if (result && result->parent)
-	{
-		// Trouver le prochain mouvement
-		next_move = result;
-		while (next_move->parent && next_move->parent->parent)
-		{
-			next_move = next_move->parent;
-		}
-		// Déplacer le fantôme
-		game->window.maps[game->ghost.y][game->ghost.x] = '0';
-		game->ghost.x = next_move->pos.x;
-		game->ghost.y = next_move->pos.y;
-		game->window.maps[game->ghost.y][game->ghost.x] = 'G';
-	}
-	// Nettoyer la mémoire allouée par A*
-	free_grid(&tastar);
-}
-
-int	update_game(t_game *game)
-{
-	static int	frame_count = 0;
-
-	frame_count++;
-	if (frame_count % 30 == 0) // Déplacez le fantôme toutes les 30 frames
-	{
-		move_ghost(game);
-		draw_map(game);
-	}
-	draw_map(game);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
-	t_game	window;
+	t_game	game;
 
 	if (argc != 2)
 		return (ft_putstr_fd(RED ARG_ERR RESET, 2));
 	if (!file_exist(argv[1]) || !file_extention(argv[1], ".ber"))
 		return (1);
-	init_maps(argv[1], &(window.window));
-	if (!syntaxe_error(&window.window) || !is_valid_map(window.window.maps))
+	init_maps(argv[1], &(game.window));
+	if (!syntaxe_error(&game.window) || !is_valid_map(game.window.maps))
 		return (ft_printf("error"));
-	if (!check_collectible((t_point){1, 1}, &(window.window)))
+	if (!check_collectible((t_point){1, 1}, &(game.window)))
 		return (ft_printf("error ac"));
-	window.window.mlx = mlx_init();
-	if (window.window.mlx == NULL)
-	{
-		cleanup(&window);
-		printf("Erreur d'initialisation de la MiniLibX\n");
-		return (1);
-	}
-	window.window.width = window.window.col_size * 32;
-	window.window.height = window.window.row_size * 32;
-	window.window.win = mlx_new_window(window.window.mlx, window.window.width,
-			window.window.height, "So Long");
-	if (window.window.win == NULL)
-	{
-		printf("Erreur de création de la fenêtre\n");
-		cleanup(&window);
-		return (1);
-	}
-	init_ghost(&window);
-	load_images(&window);
-	draw_map(&window);
-	mlx_loop_hook(window.window.mlx, update_game, &window);
-	mlx_loop(window.window.mlx);
-	cleanup(&window);
+	window(&game);
+	cleanup(&game);
 	return (0);
 }
 
