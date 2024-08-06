@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 23:58:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/06 00:08:57 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/06 05:30:08 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ void	load_images(t_game *game)
 			"./assets/xpm/ghost.xpm", &img_width, &img_height);
 	game->images.background = mlx_xpm_file_to_image(game->window.mlx,
 			"./assets/xpm/black.xpm", &img_width, &img_height);
+	game->images.player = mlx_xpm_file_to_image(game->window.mlx,
+			"./assets/xpm/pac.xpm", &img_width, &img_height);
 }
 
 void	cleanup(t_game *game)
 {
+	if (!game)
+		return ;
 	if (game->images.wall)
 		mlx_destroy_image(game->window.mlx, game->images.wall);
 	if (game->images.collectible)

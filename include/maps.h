@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/06 00:18:31 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/06 05:20:37 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,21 @@ typedef struct s_ghost
 	int				path_index;
 }					t_ghost;
 
+typedef struct
+{
+	float			x;
+	float			y;
+	float			dx;
+	float			dy;
+	void			*img;
+}					t_pacman;
+
 typedef struct s_game
 {
 	t_window		window;
 	t_images		images;
 	t_ghost			ghost;
+	t_pacman		pacman;
 }					t_game;
 
 int					syntaxe_error(t_window *win);
@@ -103,5 +113,6 @@ void				cleanup(t_game *game);
 int					close_window(t_game *game);
 void				draw_map(t_game *game);
 void				window(t_game *game);
+void				load_map(t_game *game);
 
 #endif
