@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:01:20 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/05 04:21:51 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:21:48 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ int	check_collectible(t_point start, t_window *win)
 				result = astar(&tastar);
 				free_grid(&tastar);
 				if (!result)
-				{
-					ft_printf("ERROR : %d %d\n", j, i);
-					return (0);
-				}
+					return (ft_printf("ERROR : %d %d\n", j, i), 0);
 			}
 		}
 	}
 	return (1);
 }
 
-static int	is_wall(char *line)
+static int	is_wallc(char *line)
 {
 	int	len;
 
@@ -81,7 +78,7 @@ int	is_valid_map(char **map)
 	items[1] = 0;
 	items[2] = 0;
 	i = 0;
-	if (!is_wall(map[i]))
+	if (!is_wallc(map[i]))
 		return (0);
 	while (map[i])
 	{
@@ -89,7 +86,7 @@ int	is_valid_map(char **map)
 			return (0);
 		nb_items(map[i], items);
 		if (!map[i + 1])
-			if (!is_wall(map[i]))
+			if (!is_wallc(map[i]))
 				return (0);
 		i++;
 	}

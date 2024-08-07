@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/06 03:28:28 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:47:33 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	fill_grid(t_astar *tastar, t_window *window)
 	int	j;
 
 	i = 0;
-	while (i < window->row_size)
+	while (i < tastar->height)
 	{
 		tastar->grid[i] = malloc(sizeof(t_node) * window->col_size);
 		j = 0;
-		while (j < window->col_size)
+		while (j < tastar->width)
 		{
 			tastar->grid[i][j] = *create_node(j, i);
 			tastar->grid[i][j].h = heuristic((t_point){j, i}, tastar->end);

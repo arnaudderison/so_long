@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/06 05:20:37 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/07 20:06:53 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,11 @@ typedef struct s_ghost
 {
 	int				x;
 	int				y;
-	float			pixel_x;
-	float			pixel_y;
-	int				current_target;
-	int				num_targets;
+	int				dx;
+	int				dy;
 	float			speed;
-	t_point			targets[100];
-	int				frame_count;
 	void			*img;
 	t_node			*path;
-	int				path_index;
 }					t_ghost;
 
 typedef struct
@@ -108,11 +103,6 @@ void				set_start_node(t_astar *tastar);
 int					process_result(t_node *result);
 int					check_collectible(t_point start, t_window *win);
 void				print_path(t_node *end);
-void				load_images(t_game *game);
-void				cleanup(t_game *game);
-int					close_window(t_game *game);
-void				draw_map(t_game *game);
-void				window(t_game *game);
-void				load_map(t_game *game);
+int					is_wall(int x, int y, t_game *game);
 
 #endif

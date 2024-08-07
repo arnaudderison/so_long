@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 07:06:30 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/01 20:52:51 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:56:17 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@
 # define CYN "\x1B[36m"
 # define RESET "\x1B[0m"
 
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
+# define KEY_ESC 53
+
 # define ARG_ERR "Number(s) of arg(s) is invalid"
 # define NULL_PTR "Pointer NULL"
 
@@ -41,4 +51,12 @@ t_bool	file_extention(const char *path, const char *ext);
 t_bool	line_checkchr(char *line);
 t_bool	line_checknbr(char *line, int size);
 void	init_maps(char *path, t_window *win);
+void	load_images(t_game *game);
+void	cleanup(t_game *game);
+int		close_window(t_game *game);
+void	draw_map(t_game *game);
+void	window(t_game *game);
+void	load_map(t_game *game);
+void	move_wall(t_point dest, t_game *game);
+
 #endif
