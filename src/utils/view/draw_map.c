@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:01:01 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/07 20:22:04 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/08 00:33:44 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	load_map(t_game *game)
 				img_to_use = game->images.wall;
 			else if (game->window.maps[y][x] == 'C')
 				img_to_use = game->images.collectible;
-			else if (game->window.maps[y][x] == 'G')
-				img_to_use = game->images.ghost;
 			else
 				img_to_use = game->images.background;
 			mlx_put_image_to_window(game->window.mlx, game->window.win,

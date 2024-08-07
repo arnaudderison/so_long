@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/07 20:06:53 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/08 00:21:31 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_ghost
 	float			speed;
 	void			*img;
 	t_node			*path;
+	int				frame_counter;
 }					t_ghost;
 
 typedef struct
