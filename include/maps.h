@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/08 00:21:31 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/11 22:26:59 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ typedef struct s_game
 	t_images		images;
 	t_ghost			ghost;
 	t_pacman		pacman;
+	int				gameOver;
 }					t_game;
 
 int					syntaxe_error(t_window *win);
-int					is_valid_map(char **map);
+int					is_valid_map(t_window *win);
 int					is_valid(t_astar *astar, int x, int y);
 t_node				*create_node(int x, int y);
 t_node				*astar(t_astar *astar);

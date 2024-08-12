@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/07 19:47:33 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/12 05:17:28 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv)
 	if (!file_exist(argv[1]) || !file_extention(argv[1], ".ber"))
 		return (1);
 	init_maps(argv[1], &(game.window));
-	if (!syntaxe_error(&game.window) || !is_valid_map(game.window.maps))
+	if (!syntaxe_error(&game.window) || !is_valid_map(&game.window))
 		return (ft_printf("error"));
 	if (!check_collectible((t_point){1, 1}, &(game.window)))
 		return (ft_printf("error ac"));

@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:01:20 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/07 19:21:48 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/11 22:27:23 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,27 @@ static void	nb_items(char *line, int *items)
 	}
 }
 
-int	is_valid_map(char **map)
+int	is_valid_map(t_window *win)
 {
 	int	items[3];
 	int	i;
 
-	if (!map || !*map)
+	if (!win->maps)
 		return (false);
 	items[0] = 0;
 	items[1] = 0;
 	items[2] = 0;
 	i = 0;
-	if (!is_wallc(map[i]))
+	if (!is_wallc(win->maps[i]))
 		return (0);
-	while (map[i])
+	while (win->maps[i] && i < win->row_size)
 	{
-		if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 2] != '1')
+		if (win->maps[i][0] != '1' || win->maps[i][ft_strlen(win->maps[i])
+			- 2] != '1')
 			return (0);
-		nb_items(map[i], items);
-		if (!map[i + 1])
-			if (!is_wallc(map[i]))
+		nb_items(win->maps[i], items);
+		if (!win->maps[i + 1])
+			if (!is_wallc(win->maps[i]))
 				return (0);
 		i++;
 	}
