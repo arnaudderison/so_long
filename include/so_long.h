@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 07:06:30 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/07 16:56:17 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/16 03:33:04 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,9 @@ void	draw_map(t_game *game);
 void	window(t_game *game);
 void	load_map(t_game *game);
 void	move_wall(t_point dest, t_game *game);
+int		is_collision(t_game *game, int keycode);
+int		check_pacman_ghost_collision(t_game *game);
+void	end_game(t_game *game, char *msg);
+void	move_ghost(t_game *game);
 
 #endif

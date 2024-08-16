@@ -6,19 +6,46 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:01:01 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/08 00:33:44 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/16 04:27:17 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	*player_set(t_game *game, int x, int y)
+static void	*player_set(t_game *game, int x, int y)
 {
 	game->pacman.x = x * 32;
 	game->pacman.y = y * 32;
 	game->pacman.dx = game->pacman.dx;
 	game->pacman.dy = game->pacman.dy;
 	return (game->images.player);
+}
+
+static void	*ghost_set(t_game *game, int x, int y)
+{
+	game->ghost.x = x * 32 + 16;
+	game->ghost.y = y * 32 + 16;
+	game->ghost.dx = game->ghost.dx;
+	game->ghost.dy = game->ghost.dy;
+	return (game->images.ghost);
+}
+
+int	count_c(t_window *win)
+{
+	int	x;
+	int	y;
+	int	c_count;
+
+	y = -1;
+	c_count = 0;
+	while (++y < win->row_size)
+	{
+		x = -1;
+		while (++x < win->col_size - 1)
+			if (win->maps[y][x] == 'C')
+				c_count++;
+	}
+	return (c_count);
 }
 
 void	draw_map(t_game *game)
@@ -28,7 +55,7 @@ void	draw_map(t_game *game)
 	void	*img_to_use;
 
 	y = -1;
-	while (++y < game->window.row_size)
+	while (++y < game->window.row_size - 1)
 	{
 		x = -1;
 		while (++x < game->window.col_size)
@@ -41,7 +68,7 @@ void	draw_map(t_game *game)
 			else if (game->window.maps[y][x] == 'P')
 				img_to_use = player_set(game, x, y);
 			else if (game->window.maps[y][x] == 'G')
-				img_to_use = game->images.ghost;
+				img_to_use = ghost_set(game, x, y);
 			else
 				img_to_use = game->images.background;
 			mlx_put_image_to_window(game->window.mlx, game->window.win,

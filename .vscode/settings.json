@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "ios": "c"
+        "ios": "c",
+        "so_long.h": "c"
     }
 }

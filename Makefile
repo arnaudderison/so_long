@@ -6,7 +6,7 @@
 #    By: aderison <aderison@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 06:35:03 by aderison          #+#    #+#              #
-#    Updated: 2024/08/07 16:39:54 by aderison         ###   ########.fr        #
+#    Updated: 2024/08/16 01:15:44 by aderison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ NC=\033[0m
 SO_LONGS_FILE = $(addprefix file/, file_exist.c file_extention.c)
 SO_LONGS_MAPS = $(addprefix maps/, line_checkchr.c line_checknbr.c init.c \
 syntaxe_error.c is_valid_map.c astar_utils.c)
-SO_LONGS_VIEW = $(addprefix view/, images.c draw_map.c window.c is_wall.c)
+SO_LONGS_VIEW = $(addprefix view/, images.c draw_map.c window.c collision.c end_game.c move_ghost.c)
 SO_LONGS_UTILS = $(addprefix utils/, $(SO_LONGS_FILE) $(SO_LONGS_MAPS) $(SO_LONGS_VIEW))
 
 #so_long maps

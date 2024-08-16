@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_wall.c                                          :+:      :+:    :+:   */
+/*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 16:30:58 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/07 17:27:27 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/16 03:54:21 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,34 @@ void	move_wall(t_point dest, t_game *game)
 	else if (game->pacman.dy < 0)
 		if (!is_wall(left, top, game) && !is_wall(right, top, game))
 			game->pacman.y = dest.y;
+}
+
+int	check_pacman_ghost_collision(t_game *game)
+{
+	float	dx;
+	float	dy;
+	float	distance;
+
+	dx = game->pacman.x - game->ghost.x + 16;
+	dy = game->pacman.y - game->ghost.y + 16;
+	distance = sqrt(dx * dx + dy * dy);
+	return (distance < 18);
+}
+
+int	is_collision(t_game *game, int keycode)
+{
+	int	cell_x;
+	int	cell_y;
+
+	cell_x = (game->pacman.x + 16) / 32;
+	cell_y = (game->pacman.y + 16) / 32;
+	if (keycode == KEY_RIGHT)
+		return (!is_wall(cell_x + 1, cell_y, game));
+	else if (keycode == KEY_LEFT)
+		return (!is_wall(cell_x - 1, cell_y, game));
+	else if (keycode == KEY_DOWN)
+		return (!is_wall(cell_x, cell_y + 1, game));
+	else if (keycode == KEY_UP)
+		return (!is_wall(cell_x, cell_y - 1, game));
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/11 22:26:59 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/16 04:00:26 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_window
 	void			*img;
 	int				width;
 	int				height;
+	int				col_count;
 }					t_window;
 
 typedef struct s_ghost
@@ -106,5 +107,5 @@ int					process_result(t_node *result);
 int					check_collectible(t_point start, t_window *win);
 void				print_path(t_node *end);
 int					is_wall(int x, int y, t_game *game);
-
+int					count_c(t_window *win);
 #endif
