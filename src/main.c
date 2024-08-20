@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/12 05:17:28 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:16:48 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	initialize_astar(t_astar *tastar, t_window *window, t_point src,
 	tastar->start.y = src.y;
 	tastar->end.x = dest.x;
 	tastar->end.y = dest.y;
+	tastar->grid = NULL;
 	tastar->grid = malloc(sizeof(t_node *) * window->row_size);
 }
 
@@ -72,6 +73,8 @@ void	fill_grid(t_astar *tastar, t_window *window)
 	while (i < tastar->height)
 	{
 		tastar->grid[i] = malloc(sizeof(t_node) * window->col_size);
+		if (!tastar->grid[i])
+			return ;
 		j = 0;
 		while (j < tastar->width)
 		{
@@ -123,7 +126,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-/*
+/*,
 
  -------------------------------------
 |                  .                  |

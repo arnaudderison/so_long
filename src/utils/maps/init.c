@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:23:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/07/25 21:04:56 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:10:59 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,18 @@ void	init_maps(char *path, t_window *win)
 	win->row_size = i;
 	set_maps(path, win);
 	close(fd);
+}
+
+void	init_game(t_game *game)
+{
+	game->pacman.dx = 0.0;
+	game->pacman.dy = 0.0;
+	game->ghost.dx = 0;
+	game->ghost.dy = 0;
+	game->ghost.available = 0;
+	game->ghost.speed = 3.5f;
+	game->ghost.frame_counter = 0;
+	game->gameOver = 0;
+	game->window.col_count = 0;
+	game->point = 0;
 }

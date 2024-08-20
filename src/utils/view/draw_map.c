@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:01:01 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/16 04:27:17 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:42:26 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	*ghost_set(t_game *game, int x, int y)
 	game->ghost.y = y * 32 + 16;
 	game->ghost.dx = game->ghost.dx;
 	game->ghost.dy = game->ghost.dy;
+	game->ghost.available = 1;
 	return (game->images.ghost);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 03:44:28 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/05 01:47:46 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:35:28 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,16 @@ void	free_grid(t_astar *astar)
 {
 	int	i;
 
+	if (!astar)
+		return ;
 	i = 0;
-	while (i < astar->height)
+	while (i < astar->height && astar->grid[i])
 	{
-		free(astar->grid[i]);
+		ft_free(1, &astar->grid[i]);
 		i++;
 	}
 	free(astar->grid);
+	astar->grid = NULL;
 }
 
 int	heuristic(t_point a, t_point b)

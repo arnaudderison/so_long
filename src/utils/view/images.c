@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 23:58:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/16 04:27:39 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:49:27 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void	load_images(t_game *game)
 			"./assets/xpm/black.xpm", &img_width, &img_height);
 	game->images.player = mlx_xpm_file_to_image(game->window.mlx,
 			"./assets/xpm/pac.xpm", &img_width, &img_height);
+	game->images.player_right = mlx_xpm_file_to_image(game->window.mlx,
+			"./assets/xpm/pacman_right.xpm", &img_width, &img_height);
+	game->images.player_left = mlx_xpm_file_to_image(game->window.mlx,
+			"./assets/xpm/pacman_left.xpm", &img_width, &img_height);
+	game->images.player_up = mlx_xpm_file_to_image(game->window.mlx,
+			"./assets/xpm/pacman_up.xpm", &img_width, &img_height);
+	game->images.player_down = mlx_xpm_file_to_image(game->window.mlx,
+			"./assets/xpm/pacman_down.xpm", &img_width, &img_height);
+	game->images.portal = mlx_xpm_file_to_image(game->window.mlx,
+			"./assets/xpm/portal.xpm", &img_width, &img_height);
 }
 
 void	cleanup(t_game *game)

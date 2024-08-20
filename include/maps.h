@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/16 04:00:26 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:48:39 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ typedef struct s_images
 	void			*collectible;
 	void			*background;
 	void			*player;
+	void			*player_right;
+	void			*player_left;
+	void			*player_up;
+	void			*player_down;
 	void			*exit;
+	void			*portal;
 }					t_images;
 
 typedef struct s_window
@@ -72,6 +77,7 @@ typedef struct s_ghost
 	void			*img;
 	t_node			*path;
 	int				frame_counter;
+	int				available;
 }					t_ghost;
 
 typedef struct
@@ -90,6 +96,7 @@ typedef struct s_game
 	t_ghost			ghost;
 	t_pacman		pacman;
 	int				gameOver;
+	unsigned int	point;
 }					t_game;
 
 int					syntaxe_error(t_window *win);

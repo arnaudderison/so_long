@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 07:06:30 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/16 03:33:04 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:18:39 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ int		is_collision(t_game *game, int keycode);
 int		check_pacman_ghost_collision(t_game *game);
 void	end_game(t_game *game, char *msg);
 void	move_ghost(t_game *game);
+void	init_game(t_game *game);
+int		ft_snprintf(char *str, size_t size, const char *format, ...);
+void	pacpac(t_game *game);
+void	set_direction(t_pacman *pac, float dx, float dy);
 
 #endif
