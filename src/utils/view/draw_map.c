@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:01:01 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/19 20:42:26 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:58:31 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ int	count_c(t_window *win)
 	return (c_count);
 }
 
+void	use_portal(int x, int y, t_game *game)
+{
+	if (game->window.maps[y][x] == 'E')
+	{
+		ft_printf("here %d %d \n", x, y);
+		game->portal.x = x * 32;
+		game->portal.y = y * 32;
+	}
+}
+
 void	draw_map(t_game *game)
 {
 	int		y;
@@ -74,6 +84,7 @@ void	draw_map(t_game *game)
 				img_to_use = game->images.background;
 			mlx_put_image_to_window(game->window.mlx, game->window.win,
 				img_to_use, x * 32, y * 32);
+			use_portal(x, y, game);
 		}
 	}
 }

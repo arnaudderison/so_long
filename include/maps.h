@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/20 00:48:39 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/21 05:31:50 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,22 @@ typedef struct
 	void			*img;
 }					t_pacman;
 
+typedef struct s_portal
+{
+	unsigned int	x;
+	unsigned int	y;
+}					t_portal;
+
 typedef struct s_game
 {
 	t_window		window;
 	t_images		images;
 	t_ghost			ghost;
 	t_pacman		pacman;
+	t_portal		portal;
 	int				gameOver;
 	unsigned int	point;
+	int				move;
 }					t_game;
 
 int					syntaxe_error(t_window *win);
@@ -115,4 +123,5 @@ int					check_collectible(t_point start, t_window *win);
 void				print_path(t_node *end);
 int					is_wall(int x, int y, t_game *game);
 int					count_c(t_window *win);
+
 #endif

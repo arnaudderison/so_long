@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 16:30:58 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/16 03:54:21 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:37:38 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,25 @@ int	check_pacman_ghost_collision(t_game *game)
 	dx = game->pacman.x - game->ghost.x + 16;
 	dy = game->pacman.y - game->ghost.y + 16;
 	distance = sqrt(dx * dx + dy * dy);
-	return (distance < 18);
+	return (distance < 16);
+}
+
+int	check_pacman_portal_collision(t_game *game)
+{
+	int	dx;
+	int	dy;
+	int	distance;
+
+	if (!game)
+		return (0);
+	ft_printf("POS portal sfasdfa: %d %d\n", game->portal.x, game->portal.y);
+	dx = (int)game->pacman.x - game->portal.x;
+	dy = (int)game->pacman.y - game->portal.y;
+	distance = sqrt(dx * dx + dy * dy);
+	ft_printf("POS portal sfasdfa: %d %d\n", dx, dy);
+	ft_printf("Distance : %d \t POS portal : %d %d\n", distance, game->portal.x,
+		game->portal.y);
+	return (distance < 16);
 }
 
 int	is_collision(t_game *game, int keycode)
