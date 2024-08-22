@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:01:01 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/20 23:58:31 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:59:25 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	use_portal(int x, int y, t_game *game)
 {
 	if (game->window.maps[y][x] == 'E')
 	{
-		ft_printf("here %d %d \n", x, y);
 		game->portal.x = x * 32;
 		game->portal.y = y * 32;
 	}
@@ -71,7 +70,6 @@ void	draw_map(t_game *game)
 		x = -1;
 		while (++x < game->window.col_size)
 		{
-			img_to_use = NULL;
 			if (game->window.maps[y][x] == '1')
 				img_to_use = game->images.wall;
 			else if (game->window.maps[y][x] == 'C')

@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 21:24:24 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/21 05:31:50 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:55:00 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void				fill_grid(t_astar *tastar, t_window *window);
 void				set_start_node(t_astar *tastar);
 int					process_result(t_node *result);
 int					check_collectible(t_point start, t_window *win);
-void				print_path(t_node *end);
 int					is_wall(int x, int y, t_game *game);
 int					count_c(t_window *win);
 

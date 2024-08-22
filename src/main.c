@@ -6,50 +6,12 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/19 22:16:48 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:55:50 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
-
-void	print_path(t_node *end)
-{
-	t_node	*current;
-	char	grid[23][30];
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < 23)
-	{
-		j = 0;
-		while (j < 31)
-		{
-			grid[i][j] = '.';
-			j++;
-		}
-		i++;
-	}
-	current = end;
-	while (current)
-	{
-		grid[current->pos.y][current->pos.x] = '*';
-		current = current->parent;
-	}
-	i = 0;
-	while (i < 23)
-	{
-		j = 0;
-		while (j < 31)
-		{
-			ft_printf("%c ", grid[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
 
 void	initialize_astar(t_astar *tastar, t_window *window, t_point src,
 		t_point dest)
@@ -92,20 +54,13 @@ void	fill_grid(t_astar *tastar, t_window *window)
 
 void	set_start_node(t_astar *tastar)
 {
-	tastar->grid[tastar->start.y][tastar->start.x].g = 0;
-	tastar->grid[tastar->start.y][tastar->start.x].f = tastar->grid[tastar->start.y][tastar->start.x].h;
-}
+	int	y;
+	int	x;
 
-int	process_result(t_node *result)
-{
-	if (result)
-	{
-		ft_printf("Path found!\n");
-		print_path(result);
-	}
-	else
-		ft_printf("No path found.\n");
-	return (0);
+	x = tastar->start.x;
+	y = tastar->start.y;
+	tastar->grid[y][x].g = 0;
+	tastar->grid[y][x].f = tastar->grid[y][x].h;
 }
 
 int	main(int argc, char **argv)

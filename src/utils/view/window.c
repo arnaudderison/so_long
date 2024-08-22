@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:13:47 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 13:25:04 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:39:54 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	window(t_game *game)
 	init_game(game);
 	game->window.col_count = count_c(&game->window);
 	draw_map(game);
-	mlx_hook(game->window.win, 2, 0, (int (*)(int, void *))key_press, game);
+	mlx_hook(game->window.win, 2, 0, key_press, game);
 	mlx_loop_hook(game->window.mlx, game_loop, game);
 	mlx_loop(game->window.mlx);
 }

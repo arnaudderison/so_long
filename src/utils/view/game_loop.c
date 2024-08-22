@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:23:26 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 13:25:02 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:12:18 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,30 @@ static void	portal(t_game *game)
 
 int	is_win(t_game *game)
 {
-	if (game->window.maps[(int)(game->pacman.y) / 32][(int)(game->pacman.x)
-		/ 32] == 'C')
+	if (game->window.maps[(int)(game->pacman.y + 16) / 32][(int)(game->pacman.x
+			+ 16) / 32] == 'C')
 	{
-		game->window.maps[(int)game->pacman.y / 32][(int)game->pacman.x
-			/ 32] = '0';
+		game->window.maps[(int)(game->pacman.y + 16) / 32][(int)(game->pacman.x
+				+ 16) / 32] = '0';
 		game->window.col_count--;
 		game->point++;
 		if (game->window.col_count == 0)
 			return (portal(game), 1);
 	}
 	return (0);
+}
+
+static int	maps_process(t_game *game)
+{
+	if (game->gameOver == -42)
+	{
+		if (check_pacman_portal_collision(game))
+			return (end_game(game, "WIN"), 0);
+		portal(game);
+	}
+	else
+		load_map(game);
+	return (1);
 }
 
 int	game_loop(t_game *game)
@@ -66,14 +79,7 @@ int	game_loop(t_game *game)
 	move_wall((t_point){new_x, new_y}, game);
 	mlx_clear_window(game->window.mlx, game->window.win);
 	is_win(game);
-	if (game->gameOver == -42)
-	{
-		if (check_pacman_portal_collision(game))
-			return (end_game(game, "WIN"), 0);
-		portal(game);
-	}
-	else
-		load_map(game);
+	maps_process(game);
 	if (game->ghost.frame_counter % 1 == 0 && game->ghost.available)
 		move_ghost(game);
 	if (check_pacman_ghost_collision(game))
