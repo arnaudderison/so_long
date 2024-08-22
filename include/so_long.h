@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 07:06:30 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/21 05:36:34 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:26:00 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int		ft_snprintf(char *str, size_t size, const char *format, ...);
 void	pacpac(t_game *game);
 void	set_direction(t_pacman *pac, float dx, float dy, t_game *game);
 int		check_pacman_portal_collision(t_game *game);
+void	display_score(t_game *game);
+int		game_loop(t_game *game);
 
 #endif
