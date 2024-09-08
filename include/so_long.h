@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 07:06:30 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 13:26:00 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:18:51 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define KEY_DOWN 125
 # define KEY_UP 126
 # define KEY_ESC 53
+
+# define SPEED 4.0
 
 # define ARG_ERR "Number(s) of arg(s) is invalid"
 # define NULL_PTR "Pointer NULL"
@@ -69,5 +71,6 @@ void	set_direction(t_pacman *pac, float dx, float dy, t_game *game);
 int		check_pacman_portal_collision(t_game *game);
 void	display_score(t_game *game);
 int		game_loop(t_game *game);
+void	use_portal(int x, int y, t_game *game);
 
 #endif

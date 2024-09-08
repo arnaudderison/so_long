@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 23:14:45 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 00:49:19 by aderison         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:08:27 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	direction_pac(t_game *game)
 
 void	pacpac(t_game *game)
 {
-	if (game->ghost.frame_counter % 5 < 2)
+	if (game->ghost.frame_counter % 20 < 10)
 		direction_pac(game);
 	else
 	{

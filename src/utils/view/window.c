@@ -6,14 +6,12 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:13:47 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 16:39:54 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:27:51 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
-
-#define SPEED 9.0
 
 void	display_score(t_game *game)
 {

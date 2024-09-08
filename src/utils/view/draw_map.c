@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:01:01 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 16:59:25 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/08 15:18:03 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,6 @@ int	count_c(t_window *win)
 				c_count++;
 	}
 	return (c_count);
-}
-
-void	use_portal(int x, int y, t_game *game)
-{
-	if (game->window.maps[y][x] == 'E')
-	{
-		game->portal.x = x * 32;
-		game->portal.y = y * 32;
-	}
 }
 
 void	draw_map(t_game *game)

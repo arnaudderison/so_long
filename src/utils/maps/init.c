@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:23:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/22 00:55:19 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:33:54 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_game(t_game *game)
 	game->ghost.dx = 0;
 	game->ghost.dy = 0;
 	game->ghost.available = 0;
-	game->ghost.speed = 9;
+	game->ghost.speed = 4;
 	game->ghost.frame_counter = 0;
 	game->gameOver = 0;
 	game->window.col_count = 0;
