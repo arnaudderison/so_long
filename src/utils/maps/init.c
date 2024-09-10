@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:23:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/09/03 15:33:54 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/10 21:51:04 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	init_game(t_game *game)
 {
 	game->pacman.dx = 0.0;
 	game->pacman.dy = 0.0;
-	game->ghost.dx = 0;
-	game->ghost.dy = 0;
+	game->ghost.dx = -1;
+	game->ghost.dy = -1;
 	game->ghost.available = 0;
 	game->ghost.speed = 4;
 	game->ghost.frame_counter = 0;

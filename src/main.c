@@ -6,12 +6,11 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 06:51:00 by aderison          #+#    #+#             */
-/*   Updated: 2024/09/08 15:41:50 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/10 21:48:12 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 void	initialize_astar(t_astar *tastar, t_window *window, t_point src,
 		t_point dest)
