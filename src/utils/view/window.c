@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:13:47 by aderison          #+#    #+#             */
-/*   Updated: 2024/09/22 18:00:47 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:05:25 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	key_press(int keycode, t_game *game)
 		game->pacman.x = roundf(game->pacman.x / 32) * 32;
 	}
 	else if (keycode == KEY_ESC)
-		return (system("leaks so_long"), exit(0), 0);
+		return (exit(0), 0);
 	return (0);
 }
 
