@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 16:30:58 by aderison          #+#    #+#             */
-/*   Updated: 2024/09/03 15:38:23 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/22 17:47:42 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ int	is_collision(t_game *game, int keycode)
 
 	cell_x = (game->pacman.x + 16) / 32;
 	cell_y = (game->pacman.y + 16) / 32;
-	if (keycode == KEY_RIGHT)
+	if (keycode == KEY_D)
 		return (!is_wall(cell_x + 1, cell_y, game));
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_A)
 		return (!is_wall(cell_x - 1, cell_y, game));
-	else if (keycode == KEY_DOWN)
+	else if (keycode == KEY_S)
 		return (!is_wall(cell_x, cell_y + 1, game));
-	else if (keycode == KEY_UP)
+	else if (keycode == KEY_W)
 		return (!is_wall(cell_x, cell_y - 1, game));
 	return (1);
 }

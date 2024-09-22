@@ -6,7 +6,7 @@
 #    By: aderison <aderison@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 06:35:03 by aderison          #+#    #+#              #
-#    Updated: 2024/09/08 15:19:17 by aderison         ###   ########.fr        #
+#    Updated: 2024/09/22 02:30:40 by aderison         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ YELLOW=\033[1;33m
 CYAN=\033[0;36m
 NC=\033[0m
 
-
 #so_long utils
 SO_LONGS_FILE = $(addprefix file/, file_exist.c file_extention.c)
 SO_LONGS_MAPS = $(addprefix maps/, line_checkchr.c line_checknbr.c init.c \
@@ -42,7 +41,6 @@ SO_LONG_MAIN = main.c
 #so_long sources
 SO_LONG_SRCS = $(addprefix src/, $(SO_LONG_MAIN) $(SO_LONGS_UTILS) $(SO_LONG_MAPS_F))
 SO_LONG_OBJS = $(SO_LONG_SRCS:src/%.c=obj/%.o)
-
 
 # Compilation rules
 all: $(NAME)

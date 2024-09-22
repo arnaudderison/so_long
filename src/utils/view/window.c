@@ -6,12 +6,11 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:13:47 by aderison          #+#    #+#             */
-/*   Updated: 2024/09/03 15:27:51 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/22 18:00:47 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 void	display_score(t_game *game)
 {
@@ -39,28 +38,28 @@ void	set_direction(t_pacman *pac, float dx, float dy, t_game *game)
 
 int	key_press(int keycode, t_game *game)
 {
-	if (keycode == KEY_LEFT && is_collision(game, keycode))
+	if (keycode == KEY_A && is_collision(game, keycode))
 	{
 		set_direction(&(game->pacman), -SPEED, 0.0, game);
 		game->pacman.y = roundf(game->pacman.y / 32) * 32;
 	}
-	else if (keycode == KEY_RIGHT && is_collision(game, keycode))
+	else if (keycode == KEY_D && is_collision(game, keycode))
 	{
 		set_direction(&(game->pacman), SPEED, 0.0, game);
 		game->pacman.y = roundf(game->pacman.y / 32) * 32;
 	}
-	else if (keycode == KEY_DOWN && is_collision(game, keycode))
+	else if (keycode == KEY_S && is_collision(game, keycode))
 	{
 		set_direction(&(game->pacman), 0.0, SPEED, game);
 		game->pacman.x = roundf(game->pacman.x / 32) * 32;
 	}
-	else if (keycode == KEY_UP && is_collision(game, keycode))
+	else if (keycode == KEY_W && is_collision(game, keycode))
 	{
 		set_direction(&(game->pacman), 0.0, -SPEED, game);
 		game->pacman.x = roundf(game->pacman.x / 32) * 32;
 	}
 	else if (keycode == KEY_ESC)
-		exit(0);
+		return (system("leaks so_long"), exit(0), 0);
 	return (0);
 }
 

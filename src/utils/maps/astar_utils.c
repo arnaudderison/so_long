@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 03:44:28 by aderison          #+#    #+#             */
-/*   Updated: 2024/08/19 20:35:28 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/22 02:23:44 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	heuristic(t_point a, t_point b)
 
 int	is_valid(t_astar *astar, int x, int y)
 {
+	// ft_printf("test %d\n", astar->grid[y][x].g);
 	return (x >= 0 && x < astar->width && y >= 0 && y < astar->height
 		&& astar->grid[y][x].g != -1);
 }

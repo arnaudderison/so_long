@@ -6,7 +6,7 @@
 /*   By: aderison <aderison@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:23:16 by aderison          #+#    #+#             */
-/*   Updated: 2024/09/10 21:51:04 by aderison         ###   ########.fr       */
+/*   Updated: 2024/09/22 01:38:59 by aderison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_maps(char *path, t_window *win)
 		i++;
 		line = get_next_line(fd);
 	}
-	win->maps = (char **)malloc(sizeof(char *) * i);
+	win->maps = (char **)malloc(sizeof(char *) * (i + 1));
 	win->row_size = i;
 	set_maps(path, win);
 	close(fd);
